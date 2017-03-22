@@ -122,42 +122,10 @@ public class mainGUI extends JFrame{
 	});
 		add(button4);
 		
-		//panel.addMouseMotionListener((MouseMotionListener) new listener());
-		/*for(int i=0;i<500;i+=10){
-			for(int j=0;j<500;j+=10){
-				JPanel bu=new JPanel();
-				bu.setBackground(Color.red);
-			  panel.add(bu);
-			  bu.setSize(10,10);
-			  bu.setLocation(i,j);
-			  
-			 
-			  }
-		}*/
+		
 	}//constructor ends here
 	
-	
-	/*class listener implements MouseMotionListener{
-		@Override
-		public void mouseDragged(MouseEvent event) {
-			JPanel e=(JPanel) event.getSource();
-			JPanel k=(JPanel)e.getComponentAt(event.getX(),event.getY());
-			
-		   k.setBackground(Color.black);			
-			
-		}
 
-		@Override
-		public void mouseMoved(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-	
-		
-	}*/
-	
-	
 
 public static void analyse_points(){
 	ArrayList<Point> a=panel.getPoints();
@@ -169,7 +137,7 @@ public static void analyse_points(){
 		
 		ArrayList<Point> b=pointC.getArray();
 	
-	//Collections.sort(a,new Word());
+	
 	int minm=0,maxm=0;
 	if(a.size()<b.size()){
 		minm=a.size();
@@ -230,10 +198,9 @@ public static void analyse_points(){
 
 @SuppressWarnings("unchecked")
 public static void loadFromFile(){
-	
 	ObjectInputStream input = null;
 	try {
-		input=new ObjectInputStream(new FileInputStream("C:\\Users\\Yugal\\Documents\\JAVA\\GestureInterpreter\\src\\Database.ser"));
+		input=new ObjectInputStream(new FileInputStream("Database.ser"));
 	} 
 	catch (FileNotFoundException e) {
 		System.out.println("Create the Database First");
@@ -241,28 +208,21 @@ public static void loadFromFile(){
 		status.setText(STATUS);
 	} catch (IOException e) {
 	}
-
-	
 		try {
 			dataMain=(ArrayList<PointsContainer>) input.readObject();
 			STATUS="Successfully Loaded From File\n";
 			status.setText(STATUS);
 			
 		} catch(EOFException endOfFileException){
-
 			}
-		catch(IOException e){}catch(ClassNotFoundException c){}catch(NullPointerException n){}
-	
-	
+		catch(IOException e){}catch(ClassNotFoundException c){}catch(NullPointerException n){}	
 }//end loadFromFile
 
 
 
 public static void feedToFile(){
-	
-	
 	try {
-		output=new ObjectOutputStream(new FileOutputStream("C:\\Users\\Yugal\\Documents\\JAVA\\GestureInterpreter\\src\\Database.ser"));
+		output=new ObjectOutputStream(new FileOutputStream("Database.ser"));
 		output.writeObject(dataMain);
 		output.close();
 	} catch (FileNotFoundException e) {
@@ -281,7 +241,6 @@ public static void feedToFile(){
 
 
 public static void makeDbase(){
-	
 	dataMain.add(new PointsContainer(new ArrayList<Point>(panel.getPoints()),field.getText()));
 	System.out.println("Done");
 	STATUS+="Done\n";
